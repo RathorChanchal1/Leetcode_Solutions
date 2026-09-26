@@ -1,8 +1,8 @@
 # Two Sum
 - Difficulty: Easy
 - Language: java
-- Runtime: 38 ms
-- Memory: 47 MB
+- Runtime: 4 ms
+- Memory: 46.6 MB
 - Test cases: 65/65
 - LeetCode: https://leetcode.com/problems/two-sum/
-- Last synced: 2026-09-26T07:49:22.734Z
+- Last synced: 2026-09-26T08:48:57.376Z
