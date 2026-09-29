@@ -7,10 +7,10 @@ class Solution {
             int mid = (l+r)/2;
             if(nums[mid]==target){
                 return mid;
-            }else if(nums[l]==target){
-                return l;
-            }else if(nums[r]==target){
-                return r;
+            // }else if(nums[l]==target){
+            //     return l;
+            // }else if(nums[r]==target){
+            //     return r;
             }else if((nums[l]<nums[mid] && target<nums[mid] && target>=nums[l]) || (nums[r]>nums[mid] && (target<nums[mid] || target>nums[r]))){
                 r = mid-1;
             }else{
