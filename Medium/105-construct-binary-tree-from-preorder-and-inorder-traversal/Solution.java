@@ -1,41 +1,37 @@
-/**
- * Definition for a binary tree node.
- * public class TreeNode {
- *     int val;
- *     TreeNode left;
- *     TreeNode right;
- *     TreeNode() {}
- *     TreeNode(int val) { this.val = val; }
- *     TreeNode(int val, TreeNode left, TreeNode right) {
- *         this.val = val;
- *         this.left = left;
- *         this.right = right;
- *     }
- * }
- */
+
 class Solution {
-    private int preorderIndex;
-    private Map<Integer, Integer> mapping;
-
     public TreeNode buildTree(int[] preorder, int[] inorder) {
-        mapping = new HashMap<>();
-        for (int i = 0; i < inorder.length; i++) {
-            mapping.put(inorder[i], i);
-        }
-
-        preorderIndex = 0;
-        return build(preorder, 0, inorder.length - 1);        
+        return buildTree(preorder, inorder, 0, preorder.length - 1,
+                         0, inorder.length - 1);
     }
 
-    private TreeNode build(int[] preorder, int start, int end) {
-        if (start > end) return null;
+    TreeNode buildTree(int[] preorder, int[] inorder,
+                       int pres, int prel, int ins, int inl) {
 
-        int rootVal = preorder[preorderIndex++];
-        TreeNode root = new TreeNode(rootVal);
-        int mid = mapping.get(rootVal);
+        if (pres > prel || ins > inl) {
+            return null;
+        }
 
-        root.left = build(preorder, start, mid - 1);
-        root.right = build(preorder, mid + 1, end);
+        TreeNode root = new TreeNode(preorder[pres]);
+
+        int mid = ins;
+        while (mid <= inl && inorder[mid] != preorder[pres]) {
+            mid++;
+        }
+
+        int leftSize = mid - ins;
+
+        root.left = buildTree(
+            preorder, inorder,
+            pres + 1, pres + leftSize,
+            ins, mid - 1
+        );
+
+        root.right = buildTree(
+            preorder, inorder,
+            pres + leftSize + 1, prel,
+            mid + 1, inl
+        );
 
         return root;
     }
